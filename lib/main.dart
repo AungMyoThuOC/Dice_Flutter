@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'dart:math';
 
 void main() => runApp(const MyApp());
 
@@ -33,20 +35,21 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   var dice1List = 1;
   var dice2List = 1;
+  var intValue = Random().nextInt(6);
 
   String winner = "";
 
   void _dice1Roll() {
     setState(() {
-      diceList.shuffle();
-      dice1List = diceList[0];
+      //diceList.shuffle();
+      dice1List = diceList[Random().nextInt(6)];
     });
   }
 
   void _dice2Roll() {
     setState(() {
       diceList.shuffle();
-      dice2List = diceList[0];
+      dice2List = diceList[Random().nextInt(6)];
     });
   }
 
@@ -54,31 +57,37 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     setState(() {
       if (dice1List > dice2List) {
         winner = "Player 1 win";
-        var snackbar = const SnackBar(
-          duration:  Duration(seconds: 1),
+        var snackbar = SnackBar(
+          duration:  const Duration(seconds: 1),
           content:  Text(
-            'Player 1 win ',
-            style: TextStyle(fontWeight: FontWeight.bold),
+            'Player 1 win',
+            style: GoogleFonts.amita(
+              textStyle: const TextStyle(color: Colors.blue, letterSpacing: .5,fontSize: 20),
+            ),
           ),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackbar);
       } else if (dice2List > dice1List) {
         winner = "Player 2 win";
-        var snackbar = const SnackBar(
-          duration:  Duration(seconds: 1),
+        var snackbar =  SnackBar(
+          duration: const Duration(seconds: 1),
           content:  Text(
             'Player 2 win',
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: GoogleFonts.amita(
+              textStyle: const TextStyle(color: Colors.blue, letterSpacing: .5,fontSize: 20),
+            ),
           ),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackbar);
       } else {
         winner = "Roll again!";
-        var snackbar = const SnackBar(
-          duration: Duration(seconds: 1),
+        var snackbar = SnackBar(
+          duration: const Duration(seconds: 1),
           content: Text(
             'Draw',
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: GoogleFonts.amita(
+              textStyle: const TextStyle(color: Colors.blue, letterSpacing: .5,fontSize: 20),
+            ),
           ),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackbar);
@@ -96,7 +105,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           children: [
             Column(
               children: [
-                const Text("Player 1"),
+                Text(
+                  "Player 1",
+                  style: GoogleFonts.amita(
+                    textStyle: const TextStyle(color: Colors.blue, letterSpacing: .5,fontSize: 20),
+                  ),
+                ),
                 Padding(
                     padding: const EdgeInsets.all(20),
                     child: InkWell(
@@ -114,7 +128,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             ),
             Column(
               children: [
-                const Text("Player 2"),
+                Text(
+                  "Player 2",
+                  style: GoogleFonts.amita(
+                    textStyle: const TextStyle(color: Colors.blue, letterSpacing: .5,fontSize: 20),
+                  ),
+                ),
                 Padding(
                     padding: const EdgeInsets.all(20),
                     child: InkWell(
@@ -132,11 +151,20 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             ),
           ],
         ),
+        const SizedBox(
+          height: 50,
+        ),
         ElevatedButton(
             onPressed: () {
               _winner();
             },
-            child: const Text("Who is winner")),
+            child: Text(
+              "Who is winner",
+              style: GoogleFonts.amita(
+                textStyle: const TextStyle(color: Colors.amber, letterSpacing: .5,fontSize: 20),
+              ),
+            )
+        ),
       ],
     );
   }
